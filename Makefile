@@ -1,4 +1,5 @@
-ESP_PORT ?= '/dev/tty.SLAB_USBtoUART'
+# ESP_PORT ?= '/dev/tty.SLAB_USBtoUART'
+ESP_PORT ?= '/dev/tty.wchusbserial1420'
 ESP_BAUD ?= 115200
 ESP_FIRMWARE ?= './esp8266-20171101-v1.9.3.bin'
 
@@ -10,3 +11,11 @@ download:
 flash_esp8266:
 	esptool.py --port ${ESP_PORT} erase_flash
 	esptool.py --port ${ESP_PORT} --baud ${ESP_BAUD} write_flash --flash_size=detect 0 ${ESP_FIRMWARE}
+
+.PHONY: initialize
+initialize:
+	ampy --port ${ESP_PORT} put secrets.json
+	@sleep 2
+	ampy --port ${ESP_PORT} put boot.py
+	@sleep 2
+	ampy --port ${ESP_PORT} ls
