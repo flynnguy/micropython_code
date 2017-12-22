@@ -19,3 +19,7 @@ initialize:
 	ampy --port ${ESP_PORT} put boot.py
 	@sleep 2
 	ampy --port ${ESP_PORT} ls
+
+.PHONY: attach
+attach:
+	picocom --baud ${ESP_BAUD} ${ESP_PORT}
