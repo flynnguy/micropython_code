@@ -5,7 +5,7 @@ import ubinascii
 import machine
 
 from machine import Pin, I2C
-from umqtt.simple import MQTTClient
+from umqtt.robust import MQTTClient
 
 time.sleep(10)
 
@@ -41,7 +41,7 @@ while True:
         '{}'.format(hum),
     )
     c.publish(
-        '{}/hum'.format(
+        '{}/temp'.format(
             secrets['mqtt']['prefix'],
         ),
         '{}'.format(temp),
