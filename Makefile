@@ -1,5 +1,5 @@
-# ESP_PORT ?= '/dev/tty.SLAB_USBtoUART'
-ESP_PORT ?= '/dev/tty.wchusbserial1420'
+ESP_PORT ?= '/dev/tty.SLAB_USBtoUART'
+# ESP_PORT ?= '/dev/tty.wchusbserial1420'
 ESP_BAUD ?= 115200
 ESP_FIRMWARE ?= './esp8266-20171101-v1.9.3.bin'
 

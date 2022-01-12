@@ -14,6 +14,7 @@ room = 'bedroom'
 
 # Wait for network connection or MQTT connect() will fail
 sta_if = network.WLAN(network.STA_IF)
+
 while not sta_if.isconnected():
     time.sleep(3)
 
@@ -40,6 +41,7 @@ def get_temp():
     hum = d.humidity()
 
     t_f = t_c * 9.0 / 5 + 32
+
     return t_c, t_f, hum
 
 
@@ -48,11 +50,13 @@ while True:
     c.publish(
         '{}{}/temp'.format(
             secrets['mqtt']['prefix'],
-        ), room, '{:.2f}'.format(temp_f),
+            room,
+        ), '{:.2f}'.format(temp_f),
     )
     c.publish(
-        '{}{}/hum'.format(secrets['mqtt']['prefix']),
-        room,
-        '{:.2f}'.format(hum),
+        '{}{}/hum'.format(
+            secrets['mqtt']['prefix'],
+            room,
+        ), '{:.2f}'.format(hum),
     )
     time.sleep(60 * 5)
